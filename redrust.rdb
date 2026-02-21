@@ -1,0 +1,8 @@
+{
+  "test_key": {
+    "value": {
+      "String": "test_value"
+    },
+    "expires_in_secs": null
+  }
+}
