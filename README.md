@@ -141,36 +141,36 @@ RedRust automatically loads data from `redrust.rdb` on startup and can save to d
 
 ```
 ┌─────────────────────────────────────────┐
-│           TCP Listener (6379)            │
+│           TCP Listener (6379)           │
 └─────────────────────────────────────────┘
                     │
                     ▼
 ┌─────────────────────────────────────────┐
-│        Connection Handler (thread)       │
-│  ┌───────────────────────────────────┐   │
-│  │  Command Parser (RESP protocol)  │   │
-│  └───────────────────────────────────┘   │
-│  ┌───────────────────────────────────┐   │
-│  │  Command Processor               │   │
-│  │  - String ops, List ops, etc.     │   │
-│  └───────────────────────────────────┘   │
+│        Connection Handler (thread)      │
+│  ┌───────────────────────────────────┐  │
+│  │  Command Parser (RESP protocol)   │  │
+│  └───────────────────────────────────┘  │
+│  ┌───────────────────────────────────┐  │
+│  │  Command Processor                │  │
+│  │  - String ops, List ops, etc.     │  │
+│  └───────────────────────────────────┘  │
 └─────────────────────────────────────────┘
                     │
                     ▼
 ┌─────────────────────────────────────────┐
-│    Shared State (Arc<Mutex<Store>>)        │
-│  ┌───────────────────────────────────┐   │
-│  │  HashMap<String, Entry>          │   │
-│  │  - Value (String | List)         │   │
-│  │  - Expiration (optional)           │   │
-│  └───────────────────────────────────┘   │
+│    Shared State (Arc<Mutex<Store>>)     │
+│  ┌───────────────────────────────────┐  │
+│  │  HashMap<String, Entry>           │  │
+│  │  - Value (String | List)          │  │
+│  │  - Expiration (optional)          │  │
+│  └───────────────────────────────────┘  │
 └─────────────────────────────────────────┘
         │                    │
         ▼                    ▼
-┌──────────────┐    ┌──────────────┐
-│   Cleanup    │    │ Persistence │
-│  (1s timer)  │    │ (SAVE/LOAD) │
-└──────────────┘    └──────────────┘
+┌──────────────┐      ┌──────────────┐
+│   Cleanup    │      │ Persistence  │
+│  (1s timer)  │      │ (SAVE/LOAD)  │
+└──────────────┘      └──────────────┘
 ```
 
 ## What You'll Learn
